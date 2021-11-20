@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Finding Missing People</title>
+          <link rel = "stylesheet" href="css/landing.css">
+
+          {{>header}}
+          <style>
+.poster{
+      width: 439px;
+      height: 501px;
+      margin-top: -779px;
+      margin-left: 987px;
+      border-radius: 5px;
+}
+          </style>
+
+     </head>
+
+<body>
+     <header>
+     {{>navbar1}}
+     </header>
+<section>
+     <div class="container">
+                    <h1> <b><u>Register Case</u></b></h1> <br> 
+                    
+                    <form action="/landing" method="POST" role="form" enctype="multipart/form-data">
+                         <input type="hidden" name="_id" value="{{registercase._id}}">
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="FullName"><b>Full Name:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$"  placeholder="First Name" value="{{registercase.firstname}}" name="firstname" maxlength="15" style="text-transform:capitalize" >
+                              </div>
+                              <div class="col-45">
+                                   <input type="text" pattern="^[A-Za-z \s*]+$" placeholder="Middle Name" value="{{registercase.middlename}}" name="middlename" maxlength="15" style="text-transform:capitalize">                             
+                              </div>
+                              <div class="col-55">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="Last Name" value="{{registercase.lastname}}" name="lastname" maxlength="15" style="text-transform:capitalize">                              
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Gender"><b>Gender:</b></label>
+                              </div>
+                              <div class="col-30">
+                                   <label class="radio inline">
+                                        <input type="radio" name="gender" value="Male" checked>
+                                        <span>Male</span>
+                                   </label>
+                                   <label class="radio inline">
+                                        <input type="radio" name="gender" value="Female" checked>
+                                        <span>Female</span>
+                                   </label>
+                              </div>
+                              <div class="col-40">
+                                   <label for="age"><b>Age:</b></label>
+                              </div>
+                              <div class="col-55">
+                                   <input type="number" required placeholder="Enter in Year" value="{{registercase.age}}" name="age">                              
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Height"><b>Height:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="number" required placeholder="Enter in Ft" value="{{registercase.height}}" name="height">
+                              </div>
+                              <div class="col-40">
+                                   <label for="Weight"><b>Weight:</b></label>                             
+                              </div>
+                              <div class="col-45">
+                                   <input type="number" required placeholder="Enter in lbs" value="{{registercase.weight}}" name="weight">                              
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Address"><b>Address:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="text" required placeholder="Street Name" value="{{registercase.street}}" name="street" maxlength="20" >
+                              </div>
+                              <div class="col-45">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="City" value="{{registercase.city}}" name="city" maxlength="15" style="text-transform:capitalize">
+                                                             
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Address"></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="State" value="{{registercase.state}}" name="state" maxlength="15" style="text-transform:capitalize">
+                              </div>
+                              <div class="col-45">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="Country" value="{{registercase.country}}" name="country" maxlength="15" style="text-transform:capitalize">
+                                                             
+                              </div>
+                              <div class="col-55">
+                                   <input type="number" required placeholder="Zip Code" value="{{registercase.zipcode}}" name="zipcode"maxlength="5" >                              
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Description"><b>Description:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <textarea type="text" required placeholder="Other details" value="{{registercase.description}}" name="description" rows="5" cols="50">
+                                   </textarea>
+                              </div>
+                              <div class="col-40">
+                                   <label for="LastSeen"><b>Last Seen:</b></label>
+                              </div>
+                              <div class="col-55">
+                                   <input type="text" required placeholder="Name of place" value="{{registercase.lastseen}}" name="lastseen" maxlength="15" style="text-transform:capitalize">
+                              </div>                      
+                         </div>
+                              
+                         
+                              <div class="col-60">
+                                   <label for="Image"><b>Upload Image:</b></label>
+                              </div>
+                              <div class="col-70">
+                                   <input type="file" value="{{registercase.image}}" name="file">
+                              </div>
+
+                              <div class="col-61">
+                                   <label for="Eyecolor"><b>Eye Color:</b></label>
+                              </div>
+                              <div class="col-71">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="Color of eye" value="{{registercase.eyecolor}}" name="eyecolor" maxlength="10" style="text-transform:capitalize">
+                              </div> 
+                              <div class="col-62">
+                                   <label for="Haircolor"><b>Hair Color:</b></label>
+                              </div>
+                              <div class="col-72">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="Color of hair" value="{{registercase.haircolor}}" name="haircolor" maxlength="10" style="text-transform:capitalize">
+                              </div> 
+                         
+                         
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Reported By"><b><u>Reported By:</u></b></label>
+                              </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="FullName"><b>Full Name:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="text" required pattern="^[A-Za-z \s*]+$" placeholder="Full Name" value="{{registercase.reportername}}" name="reportername" maxlength="15" style="text-transform:capitalize">
+                              </div>
+                         <div>
+                              <div class="col-26">
+                                   <label for="Status"><b>Status:</b></label>
+                              </div>
+
+                              <div class="col-36">
+                                   <label class="radio inline">
+                                        <input type="radio" name="status" value="Found" checked>
+                                        <span>Found</span>
+                                   </label>
+                                   <label class="radio inline">
+                                        <input type="radio" name="status" value="Lost" checked>
+                                        <span>Lost</span>
+                                   </label>
+                              </div>
+                         </div>
+                         </div>
+
+                         <div class="row">
+                              <div class="col-25">
+                                   <label for="Email"><b>Email:</b></label>
+                              </div>
+                              <div class="col-35">
+                                   <input type="text" required placeholder="abc@example.com" value="{{registercase.email}}" name="email">
+                              </div>
+                              <div class="col-40">
+                                   <label for="Phone"><b>Phone No:</b></label>
+                              </div>
+                              <div class="col-55">
+                                   <input type="tel" required placeholder="0123456749" value="{{registercase.phone}}" name="phone" maxlength="10">
+                              </div>
+                         </div>
+                         <br><br>
+                         
+                         
+
+                         <div class="row">
+                              <div class="col-65">
+                              <button type="submit" class="registerbtn" value="Submit"><strong>Submit</strong></button>
+                              </div>
+                              <div class="col-75">
+                              <button type="reset" class="resetbtn" value="Reset"><strong>Reset</strong></button>
+                              </div>
+                         </div>
+
+                    </form>
+                    <br>
+               </div>
+          
+     </section> 
+     <img class="poster" src="css/missing1.png" >
+
+
+</body>
+
+</html>

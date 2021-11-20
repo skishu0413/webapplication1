@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <title>Finding Missing People</title>
+          
+          <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+     
+
+           {{!-- <link rel = "stylesheet" href="css/search.css"> --}}
+
+<style>
+
+
+                
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+img { 
+     width: 400px; 
+     height: 100px; 
+     border-radius: 10px; 
+     margin-top: -32px; 
+     margin-left: -36px;
+}
+.navbar{
+     display: flex;
+     align-items: center;
+     padding: 20px;
+     padding-left: 50px;
+     padding-right: 30px;
+     padding-top: 50px;
+}
+nav{
+     flex: 1;
+     text-align: right;
+}
+nav ul{
+     display:inline-block;
+     list-style: none;
+}
+nav ul li{ 
+     display:inline-block;
+     margin-right: 70px;
+}
+nav ul li a{
+     text-decoration: none;
+     font-size: 20px;
+     color: rgba(247, 241, 241, 0.993);
+     font-family: sans-serif;
+}
+nav ul li button {
+     cursor: pointer;
+} 
+
+.container {
+     position: relative;
+     max-width: 1000px; /* Maximum width */
+     margin: 0 auto; /* Center it */
+     margin-top: 203px;
+     margin-bottom : 203px;
+   }
+   
+   .container .content {
+     position: absolute; /* Position the background text */
+     bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+     background: rgb(0, 0, 0); /* Fallback color */
+     background: rgba(0, 0, 0, 0.80); /* Black background with 0.5 opacity */
+     color: #f1f1f1; /* Grey text */
+     width: 100%; /* Full width */
+     padding: 20px; /* Some padding */
+   }
+
+
+.bg-img {
+     background-image: url('css/missing.jpg');     
+     height: 100vh;
+     background-size: cover;
+     background-position: center;
+}
+.bg-img:after{
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 100%;
+     background: rgba(0,0,0,0.7);
+}
+
+table {
+     border-collapse: collapse;
+     width: 100%;
+   }
+   
+th, td {
+     text-align: left;
+     padding: 8px;
+   }
+   
+tr:nth-child(even){
+     background-color: #597074
+}
+   
+th {
+     background-color:  teal;
+     color: white;
+}
+
+.col-4{
+     padding-left: 38px;
+}
+
+#myInput {
+     /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+
+}
+.find{
+     margin-left: 1px;
+     padding-right: 822px;
+}
+.bg{
+     background-color: bisque;
+}
+.imt {
+    width: 154px;
+    height: 122px;
+    border-radius: 10px;
+    margin-top: -3px;
+    margin-left: -2px;
+    padding-top: 3px;
+    margin-right: -61px;
+}
+
+
+   
+           </style>
+
+     </head>
+
+
+<body class="bg-img">
+
+
+     {{>navbar}}<br><br><br><br><br>
+               <h2 style="text-align: center; margin-left: 583px; margin-right: 433px; padding-left: 12px; background: teal; text-transform:uppercase; margin-top: 17px; margin-bottom: 30px; color:darkseagreen">Missing Person Records</h2>
+     <br><br><br><br><br>
+    <div class="find">
+         <input type="text" id="myInput" onkeyup="ContactsearchFX()" placeholder="Search for names..">
+     </div> <br>
+     
+<div class="bg  ">
+<table id="myTable">
+  <tr class="header">
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Gender</th>
+    <th>Age</th>
+    <th>Eye Color</th>
+    <th>Hair Color</th>
+    <th>State</th>
+    <th>Image Profile</th>
+    <th>Lost/Found</th>
+  </tr>
+  {{#each records}}
+  <tr>
+       
+    <td>{{this.firstname}}</td>
+     <td>{{this.lastname}}</td>
+     <td>{{this.gender}}</td>
+     <td>{{this.age}}</td>
+     <td>{{this.eyecolor}}</td>
+     <td>{{this.haircolor}}</td>
+     <td>{{this.state}}</td>
+     <td>                         
+          <img src="./upload/{{this.image}}" class="imt" alt="profile image">
+     </td>
+     <td>{{this.status}}</td>
+     
+  </tr>
+  {{/each}}
+  
+</table>
+</div>
+
+
+
+  <script>
+       window.onload = function() {
+  var rows = document.querySelectorAll('tr:not(.header)');
+
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].style.display = 'none';
+  }
+}
+
+function ContactsearchFX() {
+  var input, filter, table, tr, td, i;
+ 
+  input = document.getElementById("myInput");
+
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+
+      }
+    }
+  }
+  
+   var rows = document.querySelectorAll('tr:not(.header)');
+   
+   if (input.value.length == 0) {
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].style.display = 'none';
+    }
+  }
+}
+  </script>
+
+</body>
+
+</html>

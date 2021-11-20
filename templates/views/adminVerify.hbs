@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Finding Missing People</title>
+          {{>header}}
+
+		<script src='https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js'></script>
+          <link rel="stylesheet" href="css/verify.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+		 
+
+     </head>
+
+<body>
+     <header>
+     {{>navbar2}}
+     </header>
+
+<div class="verify">
+<table>
+     <tr>
+          <th colspan="3"><h1 id='mainHeaderH1' class='mainHeaderH1'>Verification of Image</h1></th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+     </tr>
+     <tr>
+          <td><h2 class="head">Input Image</h2> </td>
+          <td>&nbsp;</td>
+          <td><h2 class="head">Match Image</h2></td>
+     </tr>
+     <tr>
+          <td>
+               <canvas id='canvasInsertImage' class='canvasRoundCorders'></canvas>
+               <input id='insertImage' type='file' accept='image/*' onchange="upload('canvasInsertImage','insertImage')">
+
+          </td><br>
+          <td>
+               <i class="fa-li fa fa-spinner fa-spin"></i>
+          </td>
+          <td>
+               <canvas id='canvasUploadImage' class='canvasRoundCorder'></canvas>
+               {{!-- <input id='inputImage' type='file' accept='image/*' onchange="upload1('canvasUploadImage','inputImage')"> --}}
+
+          </td>
+     </tr>
+     <tr>
+          <td>&nbsp;</td>
+          <td>
+               <div class="bttn"><button id="verify" type="button" onclick="search()" class="button button1">Verify Photo</button></div>
+          </td>
+          <td>&nbsp;</td>
+     </tr>
+
+     <tr>
+          <td>&nbsp;</td>
+          <td>
+               <h4>Result:
+                    
+               </h4>
+          </td>
+          <td>&nbsp;</td>
+     </tr>
+</table>
+
+</div>
+
+<script>
+     //window.CP.PenTimer.MAX_TIME_IN_LOOP_WO_EXIT = 3000;
+     var image = null;
+
+     function upload(elem, input) {
+     var canvas = document.getElementById(elem);
+     var file = document.getElementById(input); 
+     image = new SimpleImage(file);
+     image.drawTo(canvas);
+
+     canvas.toDataURL ('image/jpg');
+     console.log(canvas.toDataURL('image/jpg'))
+   }
+
+function search() {
+     var insertImage = document.getElementById("insertImage").files[0];
+     var inputImage = "../../public/upload/undefined_1619056167504.jpg";
+     let blob = await fetch(inputImage).then(r => r.blob());
+     console.log(blob);
+
+
+     //var newImage = new SimpleImage(insertImage);
+
+     console.log(insertImage);
+     console.log(inputImage);
+
+}
+
+
+function callApi() {
+
+var CloudmersiveImageApiClient = require('cloudmersive-image-api-client');
+var defaultClient = CloudmersiveImageApiClient.ApiClient.instance;
+
+// Configure API key authorization: Apikey
+var Apikey = defaultClient.authentications['Apikey'];
+Apikey.apiKey = 'c55541cd-6081-4967-9ce7-78312750b9d3';
+
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+
+//Apikey.apiKeyPrefix = 'Token';
+var apiInstance = new CloudmersiveImageApiClient.FaceApi();
+var inputImage = "../../public/upload/"; // File | Image file to perform the operation on; this image can contain one or more faces which will be matched against face provided in the second image.  Common file formats such as PNG, JPEG are supported.
+var matchFace = ""; // File | Image of a single face to compare and match against.
+var callback = function(error, data, response) {
+if (error) {
+console.error(error);
+} else {
+console.log('API called successfully. Returned data: ' + data);
+}
+};
+apiInstance.faceCompare(inputImage, matchFace, callback);
+}
+</script>
+
+{{!-- <script src="js/verify.js"></script> --}}
+
+</body>
+</html> 

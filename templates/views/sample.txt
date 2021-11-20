@@ -1,0 +1,164 @@
+     {{!-- <div class="container">
+
+          
+
+     <div class="content">
+     <table class="">
+          <h2 style="text-align: center;padding-left: 163px; text-transform:uppercase; margin-top: 17px; margin-bottom: 30px; color:darkseagreen">Missing Person Records</h2>
+          <tr>
+               <td>
+
+               </td>
+
+               <td>
+                    <div>
+               
+               <table id="myTable" class="table table-striped table-primary">
+                    
+                    
+                    
+                    
+                    {{!-- <thead>
+                         <tr class="header" >
+                              <th>FirstName</th>
+                              <th>LastName</th>
+                              <th>Gender</th>
+                              <th>Age</th>
+                              <th>Eye Color</th>
+                              <th>Haircolor</th>
+                              <th>State</th>
+                              <th>Reported By</th>
+                              <th>Lost/Found</th
+                         </tr> --}}
+                         <tr class="header">
+                         <th style="width:60%;">Name</th>
+                         <th style="width:40%;">Number</th>
+                         </tr>
+                         <tr>
+                         <td>test 1</td>
+                         <td>number</td>
+                         </tr>
+                         <tr>
+                         <td>test 2</td>
+                         <td>number</td>
+                         </tr>
+                         <tr>
+                         <td>test 3</td>
+                         <td>number</td>
+                         </tr>
+                    {{!-- </thead>
+                    <tbody>
+                     {{#each records}}
+                    <tr class="header">
+                         <td>{{this.firstname}}</td>
+                         <td>{{this.lastname}}</td>
+                         <td>{{this.gender}}</td>
+                         <td>{{this.age}}</td>
+                         <td>{{this.eyecolor}}</td>
+                         <td>{{this.haircolor}}</td>
+                         <td>{{this.state}}</td>
+                         <td>{{this.reportername}}</td>
+                         <td>{{this.status}}</td>
+                                                 
+                    </tr>
+                    {{/each}}
+                    </tbody>--}}
+
+               </table>
+          </div>
+               </td>
+          </tr> 
+     </table>
+
+<script>
+
+window.onload = function() {
+  var rows = document.querySelectorAll('tr:not(.header)');
+
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].style.display = 'none';
+  }
+}
+
+function ContactsearchFX() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  
+  input = document.getElementById("myInput");
+
+  filter = input.value.toUpperCase();
+
+  table = document.getElementById("myTable");
+
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+
+
+ var rows = document.querySelectorAll('tr:not(.header)');
+   
+   if (input.value.length == 0) {
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].style.display = 'none';
+    }
+  }
+}
+     </script>
+
+     </div>
+     </div>
+
+</div> --}}
+
+
+
+
+function search() {
+     var insertImage = document.getElementById("insertImage").files[0];
+     var inputImage = "../../public/upload/undefined_1619056167504.jpg";
+     let blob = await fetch(inputImage).then(r => r.blob());
+     console.log(blob);
+
+
+     //var newImage = new SimpleImage(insertImage);
+
+     console.log(insertImage);
+     console.log(inputImage);
+
+}
+
+
+function callApi() {
+
+var CloudmersiveImageApiClient = require('cloudmersive-image-api-client');
+var defaultClient = CloudmersiveImageApiClient.ApiClient.instance;
+
+// Configure API key authorization: Apikey
+var Apikey = defaultClient.authentications['Apikey'];
+Apikey.apiKey = 'c55541cd-6081-4967-9ce7-78312750b9d3';
+
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+
+//Apikey.apiKeyPrefix = 'Token';
+var apiInstance = new CloudmersiveImageApiClient.FaceApi();
+var inputImage = "../../public/upload/"; // File | Image file to perform the operation on; this image can contain one or more faces which will be matched against face provided in the second image.  Common file formats such as PNG, JPEG are supported.
+var matchFace = ""; // File | Image of a single face to compare and match against.
+var callback = function(error, data, response) {
+if (error) {
+console.error(error);
+} else {
+console.log('API called successfully. Returned data: ' + data);
+}
+};
+apiInstance.faceCompare(inputImage, matchFace, callback);
+}
